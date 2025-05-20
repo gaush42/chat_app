@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000
 // Mount route handlers under '/api' base path
 app.use('/api', userRoutes)
 
+// Serve static files from 'view' directory
+app.use(express.static('view'))
+
 sequelize.sync()
   .then(() => {
     console.log('✅ Database connected and synced');
