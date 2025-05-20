@@ -67,6 +67,20 @@ body, html {
 .form-box button:hover {
     background-color: #45a049;
 }
+.form-box .register-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.form-box .register-link a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.form-box .register-link a:hover {
+    text-decoration: underline;
+}
 
 @media (max-width: 768px) {
     .container {
