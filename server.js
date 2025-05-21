@@ -1,6 +1,7 @@
 const express = require('express');
 const sequelize = require('./config/db');
 const userRoutes = require('./routes/user_routes');
+const { sendMessage } = require('./controller/message_controller');
 
 require("dotenv").config();
 const app = express()
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 3000
 
 // Mount route handlers under '/api' base path
 app.use('/api', userRoutes)
+app.use('/api', sendMessage)
 
 // Serve static files from 'view' directory
 app.use(express.static('view'))

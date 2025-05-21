@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css//chat_page.css">
+  <link rel="stylesheet" href="../css/chat_page.css">
   <title>Chat</title>
 </head>
 <body>
-
   <div class="chat-container">
-    <div class="chat-header">Chat with Ayaan</div>
+    <div class="chat-header" id="chatHeader">Chat with Ayaan</div>
 
-    <div class="chat-body">
-      <div class="message received">Hey, how are you?</div>
-      <div class="message sent">I'm good! What about you?</div>
-      <div class="message received">Doing well, just working on a project.</div>
-      <div class="message sent">Nice! Let me know if I can help.</div>
+    <div class="chat-body" id="chatBody">
+      <!-- Messages will be dynamically inserted here -->
     </div>
 
     <div class="chat-footer">
-      <input type="text" placeholder="Type a message...">
-      <button>Send</button>
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
     </div>
   </div>
 
+  <script src="../js/chat.js"></script>
 </body>
 </html>
