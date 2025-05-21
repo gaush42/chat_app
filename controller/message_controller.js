@@ -13,3 +13,15 @@ exports.sendMessage = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 }
+exports.getMessages = async (req, res) => {
+  try {
+    const messages = await Message.findAll({
+      include: { model: User, attributes: ['fullname'] },
+      order: [['createdAt', 'ASC']]
+    });
+    res.status(200).json({ messages });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch messages' });
+  }
+};

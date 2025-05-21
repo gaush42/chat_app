@@ -36,3 +36,12 @@ function addMessageToUI(message, type) {
   chatBody.appendChild(msgDiv);
   chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll
 }
+
+window.onload = async () => {
+  const res = await fetch('/api/get-message');
+  const data = await res.json();
+  data.messages.forEach(msg => {
+    const type = msg.userId === userId ? 'sent' : 'received';
+    addMessageToUI(`${msg.User.fullname}: ${msg.message}`, type);
+  });
+};
