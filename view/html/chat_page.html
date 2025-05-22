@@ -7,19 +7,35 @@
   <title>Chat</title>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-header" id="chatHeader">Chat with Ayaan</div>
+  <header>
+    <div class="app-name">Group Chat App</div>
+    <button onclick="logout()">Logout</button>
+  </header>
 
-    <div class="chat-body" id="chatBody">
-      <!-- Messages will be dynamically inserted here -->
+  <div class="container">
+    <div class="sidebar">
+      <button id="createGroup">+ Create Group</button>
+      <div id="groupList">
+        <!-- Example group -->
+        <div class="group-item">
+          <span>Group 1</span>
+          <button onclick="joinGroup('Group 1')">Join</button>
+        </div>
+        <!-- More groups can be added dynamically -->
+      </div>
     </div>
 
-    <div class="chat-footer">
-      <input type="text" id="messageInput" placeholder="Type a message..." />
-      <button id="sendBtn">Send</button>
+    <div class="main">
+      <div class="group-name" id="currentGroupName">Select a group to chat</div>
+      <div class="chat-box" id="chatBox">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
     </div>
   </div>
-
   <script src="../js/chat.js"></script>
 </body>
 </html>
