@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config()
-
 const User = require('../model/user_model')
 const sequelize = require('../config/db')
 
@@ -46,7 +46,13 @@ exports.Login = async (req, res) => {
         if(!user || !isPasswordMatched){
             return res.status(401).json({message: 'Invalid email or Password'})
         }
+        const token = jwt.sign(
+            {userId: user.id},
+            process.env.JWT_SECRET,
+            {expiresIn: '7h'}
+        )
         res.status(200).json({ message: 'Login successful.',
+            token,
             user: {
                 id: user.id,
                 fullname: user.fullname,

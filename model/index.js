@@ -1,21 +1,16 @@
 const User = require('./user_model');
-const Message = require('./message_model');
 const Group = require('./group_model');
+const Message = require('./message_model');
 const GroupMember = require('./group_member_model');
 
-// Existing associations
-User.hasMany(Message, { foreignKey: 'userId', onDelete: 'CASCADE' });
-Message.belongsTo(User, { foreignKey: 'userId' });
+// Associations
+User.belongsToMany(Group, { through: GroupMember });
+Group.belongsToMany(User, { through: GroupMember});
 
-// New associations
-User.belongsToMany(Group, { through: GroupMember, foreignKey: 'userId' });
-Group.belongsToMany(User, { through: GroupMember, foreignKey: 'groupId' });
+User.hasMany(Message);
+Message.belongsTo(User);
 
-Group.belongsTo(User, { as: 'admin', foreignKey: 'adminId' }); // Admin reference
+Group.hasMany(Message);
+Message.belongsTo(Group);
 
-module.exports = {
-  User,
-  Message,
-  Group,
-  GroupMember
-};
+module.exports = { User, Group, Message, GroupMember };
