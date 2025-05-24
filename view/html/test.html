@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Group Chat Actions</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/test.js" defer></script>
+</head>
+<body>
+
+  <h1>Group Chat Manager</h1>
+
+  <div>
+    <h3>Create Group</h3>
+    <input id="groupName" placeholder="Group Name">
+    <button onclick="createGroup()">Create</button>
+  </div>
+
+  <div>
+    <h3>Add Member</h3>
+    <input id="addGroupId" placeholder="Group ID">
+    <input id="addUserId" placeholder="User ID">
+    <button onclick="addMember()">Add Member</button>
+  </div>
+
+  <div>
+    <h3>Remove Member</h3>
+    <input id="removeGroupId" placeholder="Group ID">
+    <input id="removeUserId" placeholder="User ID">
+    <button onclick="removeMember()">Remove</button>
+  </div>
+
+  <div>
+    <h3>Make Admin</h3>
+    <input id="adminGroupId" placeholder="Group ID">
+    <input id="adminUserId" placeholder="User ID">
+    <button onclick="makeAdmin()">Make Admin</button>
+  </div>
+
+  <div>
+    <h3>Join Group</h3>
+    <input id="joinGroupId" placeholder="Group ID">
+    <button onclick="joinGroup()">Join</button>
+  </div>
+
+  <div>
+    <h3>Group Info</h3>
+    <input id="infoGroupId" placeholder="Group ID">
+    <button onclick="getGroupInfo()">Get Info</button>
+  </div>
+
+  <div>
+    <h3>My Groups</h3>
+    <button onclick="getMyGroups()">Load My Groups</button>
+  </div>
+
+  <div>
+    <h3>Group Messages</h3>
+    <input id="messageGroupId" placeholder="Group ID">
+    <button onclick="getMessages()">Load Messages</button>
+  </div>
+
+  <div>
+    <h3>Send Message</h3>
+    <input id="sendGroupId" placeholder="Group ID">
+    <input id="messageContent" placeholder="Message">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <hr>
+  <pre id="output"></pre>
+
+</body>
+</html>

@@ -1,12 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Signup & Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    Hello
-    <a href="./html/chat_page.html">Chat</a>
+
+  <h2>Signup</h2>
+  <form id="signupForm">
+    <input type="text" id="fullname" placeholder="Full Name" required><br>
+    <input type="email" id="signupEmail" placeholder="Email" required><br>
+    <input type="password" id="signupPassword" placeholder="Password" required><br>
+    <button type="submit">Signup</button>
+  </form>
+
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Email" required><br>
+    <input type="password" id="loginPassword" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const API_URL = "http://localhost:3000/api";
+
+    document.getElementById("signupForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const data = {
+        fullname: document.getElementById("fullname").value,
+        email: document.getElementById("signupEmail").value,
+        password: document.getElementById("signupPassword").value
+      };
+
+      try {
+        const res = await axios.post(`${API_URL}/signup`, data);
+        document.getElementById("result").innerText = JSON.stringify(res.data);
+      } catch (err) {
+        document.getElementById("result").innerText = "Signup failed: " + (err.response?.data?.message || err.message);
+      }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const data = {
+        email: document.getElementById("loginEmail").value,
+        password: document.getElementById("loginPassword").value
+      };
+
+      try {
+        const res = await axios.post(`${API_URL}/login`, data);
+
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+        }
+
+        document.getElementById("result").innerText = JSON.stringify(res.data);
+      } catch (err) {
+        document.getElementById("result").innerText = "Login failed: " + (err.response?.data?.message || err.message);
+      }
+    });
+  </script>
+
 </body>
 </html>

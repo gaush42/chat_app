@@ -1,30 +1,43 @@
 const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
 const sequelize = require('./config/db');
 const userRoutes = require('./routes/user_routes');
-const { sendMessage } = require('./controller/message_controller');
-
+const groupRoutes = require('./routes/group_routes')
+const socketHandler = require('./socket/socket_handler'); // your socket logic here
 require("dotenv").config();
-const app = express()
 
-app.use(express.json())
-const PORT = process.env.PORT || 3000
+const app = express();
+const server = http.createServer(app); // ⬅️ create raw HTTP server
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Allow from frontend; configure as needed
+  },
+});
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 3000;
 
 // Mount route handlers under '/api' base path
-app.use('/api', userRoutes)
-app.use('/api', sendMessage)
+app.use('/api', userRoutes);
+app.use('/api', groupRoutes);
 
-// Serve static files from 'view' directory
-app.use(express.static('view'))
+
+// Serve static files
+app.use(express.static('view'));
+
+// Attach your Socket.IO event handlers
+socketHandler(io); // ⬅️ sets up socket events like connection, message, etc.
 
 sequelize.sync()
   .then(() => {
     console.log('✅ Database connected and synced');
-    // Start the Express server after database sync
-    app.listen(PORT, () => {
+    server.listen(PORT, () => { // ⬅️ listen on raw HTTP server
       console.log(`🚀 Server is running on port ${PORT}`);
     });
   })
   .catch((err) => {
     console.error('❌ Failed to connect/sync database:', err);
     process.exit(1);
-});
+  });
