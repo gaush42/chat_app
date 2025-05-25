@@ -100,6 +100,7 @@ async function loadMessages(groupId, groupName) {
     const messageBox = document.getElementById('messages');
     messageBox.innerHTML = '';
     messages.forEach(displayMessage);
+    showGroupInfo();
   } catch (err) {
     console.error(err.response?.data || err.message);
     alert('Failed to load messages');
@@ -162,10 +163,12 @@ async function showGroupInfo() {
       if (isAdmin && gm.user_id !== currentUser) {
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
+        removeBtn.classList.add('member-action', 'remove-btn');
         removeBtn.onclick = () => removeMember(gm.user_id);
 
         const makeAdminBtn = document.createElement('button');
         makeAdminBtn.textContent = 'Make Admin';
+        makeAdminBtn.classList.add('member-action', 'admin-btn');
         makeAdminBtn.onclick = () => makeAdmin(gm.user_id);
 
         li.appendChild(removeBtn);
@@ -175,7 +178,7 @@ async function showGroupInfo() {
       membersList.appendChild(li);
     });
 
-    document.getElementById('groupInfoBox').style.display = 'block';
+    //document.getElementById('groupInfoBox').style.display = 'block';
     document.getElementById('adminControls').style.display = isAdmin ? 'block' : 'none';
 
   } catch (err) {

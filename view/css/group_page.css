@@ -1,33 +1,32 @@
-/* Global styles */
+/* Light theme */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f9f9f9;
   color: #333;
 }
 
 h2, h3, h4 {
-  color: #222;
+  color: #333;
 }
 
 button {
-  background-color: #1976d2;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 8px 12px;
   margin: 4px 0;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.2s;
 }
 
 button:hover {
-  background-color: #1565c0;
+  background-color: #0056b3;
 }
 
 input[type="text"] {
   background-color: #fff;
-  color: #333;
+  color: #000;
   border: 1px solid #ccc;
   padding: 6px;
   margin: 4px 0;
@@ -38,75 +37,79 @@ input[type="text"] {
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.container {
-  display: flex;
-  height: 90vh;
-  border-top: 1px solid #ddd;
-}
-
-/* Logout Header */
+/* Header */
 body > div:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
   background-color: #ffffff;
 }
 
 body > div:first-child button {
-  background-color: #e53935;
+  background-color: #dc3545;
 }
 
 body > div:first-child button:hover {
-  background-color: #c62828;
+  background-color: #c82333;
+}
+
+/* Three-column layout */
+.container {
+  display: flex;
+  height: 85vh;
 }
 
 /* Left Panel */
 .left-panel {
-  width: 30%;
+  width: 25%;
   padding: 15px;
   border-right: 1px solid #ddd;
-  background-color: #fafafa;
+  background-color: #f0f0f0;
   overflow-y: auto;
 }
+#group-list li {
+  padding: 10px 12px;
+  margin: 6px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
 
-/* Right Panel */
-.right-panel {
-  width: 70%;
+#group-list li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Middle Panel */
+.middle-panel {
+  width: 50%;
   padding: 15px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
+  border-right: 1px solid #ddd;
 }
 
-/* Group Info */
-#groupInfoBox {
-  display: none;
-  border: 1px solid #ddd;
-  padding: 10px;
+.chat-header {
   margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
 }
 
-/* Messages */
-#messages {
+.messages-box {
   flex: 1;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f5f5f5;
+  background-color: #fefefe;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* Message bubbles */
 .message {
   max-width: 60%;
   padding: 8px 12px;
@@ -117,22 +120,62 @@ body > div:first-child button:hover {
 
 .message.left {
   align-self: flex-start;
-  background-color: #e0e0e0;
-  color: #000;
+  background-color: #e4e6eb;
 }
 
 .message.right {
   align-self: flex-end;
-  background-color: #c8e6c9;
-  color: #000;
+  background-color: #dcf8c6;
 }
 
-/* Message input area */
-.right-panel > div:last-child {
+/* Message Input */
+.message-input {
   display: flex;
   gap: 10px;
+  margin-top: 10px;
 }
 
-.right-panel input[type="text"] {
+.message-input input[type="text"] {
   width: 100%;
+}
+
+/* Right Panel (Group Info) */
+.right-panel {
+  width: 25%;
+  padding: 15px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  border-left: 1px solid #ddd;
+}
+
+#adminControls {
+  margin-top: 10px;
+}
+/* Shared member action button styling */
+.member-action {
+  margin-left: 8px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Specific styles */
+.remove-btn {
+  background-color: #dc3545; /* red */
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.admin-btn {
+  background-color: #007bff; /* blue */
+  color: white;
+}
+
+.admin-btn:hover {
+  background-color: #0056b3;
 }

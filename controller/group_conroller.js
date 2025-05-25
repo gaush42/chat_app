@@ -25,7 +25,7 @@ exports.createGroup = async (req, res) => {
 // 2. Add Member (admin only)
 exports.addMember = async (req, res) => {
   try {
-    const { groupId, userId } = req.body;
+    const { groupId, email } = req.body;
 
     const isAdmin = await GroupMember.findOne({
       where: { group_id: groupId, user_id: req.userId, is_admin: true },
@@ -33,7 +33,19 @@ exports.addMember = async (req, res) => {
 
     if (!isAdmin) return res.status(403).json({ error: 'Admin access required' });
 
-    await GroupMember.create({ user_id: userId, group_id: groupId });
+    const user = await User.findOne({where: {email}})
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    // Check if the user is already a group member
+    const alreadyMember = await GroupMember.findOne({
+      where: { group_id: groupId, user_id: user.id },
+    });
+
+    if (alreadyMember) {
+      return res.status(400).json({ error: 'User is already a group member' });
+    }
+
+    await GroupMember.create({ user_id: user.id, group_id: groupId });
 
     res.json({ message: 'Member added' });
   } catch (err) {
