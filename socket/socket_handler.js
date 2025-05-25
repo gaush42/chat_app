@@ -35,7 +35,7 @@ module.exports = (io) => {
       });
 
       const sender = await User.findByPk(userId, {
-        attributes: ['id', 'firstname', 'lastname'],
+        attributes: ['id', 'fullname'],
       });
 
       io.to(`group_${groupId}`).emit('newMessage', {

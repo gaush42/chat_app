@@ -159,7 +159,7 @@ exports.getGroupMessages = async (req, res) => {
 
     const messages = await Message.findAll({
       where: { group_id: groupId },
-      include: [{ model: User, attributes: ['id', 'firstname', 'lastname'] }],
+      include: [{ model: User, attributes: ['id', 'fullname'] }],
       order: [['createdAt', 'ASC']],
     });
 

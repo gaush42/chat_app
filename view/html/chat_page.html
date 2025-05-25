@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css/chat_page.css">
-  <title>Chat</title>
+  <title>Group Chat</title>
 </head>
 <body>
-  <header>
-    <div class="app-name">Group Chat App</div>
-    <button onclick="logout()">Logout</button>
-  </header>
+  <h2>Welcome to Group Chat</h2>
+  <div style="display: flex; height: 90vh; border: 1px solid black;">
 
-  <div class="container">
-    <div class="sidebar">
-      <button id="createGroup">+ Create Group</button>
-      <div id="groupList">
-        <!-- Example group -->
-        <div class="group-item">
-          <span>Group 1</span>
-          <button onclick="joinGroup('Group 1')">Join</button>
-        </div>
-        <!-- More groups can be added dynamically -->
-      </div>
+    <!-- Left Panel -->
+    <div style="width: 30%; padding: 10px; border-right: 1px solid gray;">
+      
+      <!-- Create Group -->
+      <h3>Create Group</h3>
+      <input type="text" id="groupNameInput" placeholder="Group name" />
+      <button onclick="createGroup()">Create</button>
+
+      <!-- Join Group -->
+      <h3>Join Group</h3>
+      <input type="text" id="groupIdInput" placeholder="Group ID" />
+      <button onclick="joinGroup()">Join</button>
+
+      <!-- My Groups -->
+      <h3>My Groups</h3>
+      <ul id="group-list"></ul>
     </div>
 
-    <div class="main">
-      <div class="group-name" id="currentGroupName">Select a group to chat</div>
-      <div class="chat-box" id="chatBox">
-        <!-- Chat messages will appear here -->
-      </div>
-      <div class="input-area">
-        <input type="text" id="messageInput" placeholder="Type your message..." />
+    <!-- Right Panel -->
+    <div style="width: 70%; padding: 10px;">
+      <div id="messages" style="height: 80%; overflow-y: scroll; border: 1px solid gray; padding: 10px;"></div>
+      <div>
+        <input type="text" id="messageInput" placeholder="Type a message..." />
         <button onclick="sendMessage()">Send</button>
       </div>
     </div>
+
   </div>
-  <script src="../js/chat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="chat.js"></script>
 </body>
 </html>
