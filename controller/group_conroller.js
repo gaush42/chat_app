@@ -117,6 +117,38 @@ exports.joinGroup = async (req, res) => {
   }
 };
 
+exports.leaveGroup = async (req, res) => {
+  try {
+    const { groupId } = req.body;
+    const userId = req.userId;
+
+    const membership = await GroupMember.findOne({
+      where: { group_id: groupId, user_id: userId },
+    });
+
+    if (!membership) {
+      return res.status(404).json({ error: 'You are not a member of this group' });
+    }
+
+    // Optional: Prevent last admin from leaving
+    if (membership.is_admin) {
+      const adminCount = await GroupMember.count({
+        where: { group_id: groupId, is_admin: true }
+      });
+      if (adminCount <= 1) {
+        return res.status(400).json({ error: 'Cannot leave as the only admin' });
+      }
+    }
+
+    await membership.destroy();
+    res.json({ message: 'Left group successfully' });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to leave group' });
+  }
+};
+
 // 6. View Group Info
 exports.getGroupInfo = async (req, res) => {
   try {

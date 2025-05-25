@@ -1,68 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/chat_page.css">
   <title>Group Chat</title>
 </head>
 <body>
-  <div style="display: flex; justify-content: space-between; align-items: center;">
+  <div>
     <h2>Welcome to Group Chat</h2>
     <button onclick="logout()">Logout</button>
   </div>
 
-  <div style="display: flex; height: 90vh; border: 1px solid black;">
+  <div class="container">
+  <!-- Left Panel -->
+  <div class="left-panel">
+    <h3>Create Group</h3>
+    <input type="text" id="groupNameInput" placeholder="Group name" />
+    <button onclick="createGroup()">Create</button>
 
-    <!-- Left Panel -->
-    <div style="width: 30%; padding: 10px; border-right: 1px solid gray;">
-      
-      <!-- Create Group -->
-      <h3>Create Group</h3>
-      <input type="text" id="groupNameInput" placeholder="Group name" />
-      <button onclick="createGroup()">Create</button>
+    <h3>Join Group</h3>
+    <input type="text" id="groupIdInput" placeholder="Group ID" />
+    <button onclick="joinGroup()">Join</button>
 
-      <!-- Join Group -->
-      <h3>Join Group</h3>
-      <input type="text" id="groupIdInput" placeholder="Group ID" />
-      <button onclick="joinGroup()">Join</button>
+    <h3>My Groups</h3>
+    <ul id="group-list"></ul>
+  </div>
 
-      <!-- My Groups -->
-      <h3>My Groups</h3>
-      <ul id="group-list"></ul>
+  <!-- Middle Panel (Chat) -->
+  <div class="middle-panel">
+    <div class="chat-header">
+      <h3 id="selectedGroupName">No group selected</h3>
     </div>
-
-    <!-- Right Panel -->
-    <div style="width: 70%; padding: 10px; display: flex; flex-direction: column;">
-
-      <!-- Group Info Header -->
-      <div style="margin-bottom: 10px;">
-        <h3 id="selectedGroupName">No group selected</h3>
-        <button onclick="showGroupInfo()">Group Info</button>
-      </div>
-
-      <!-- Group Info Section -->
-      <div id="groupInfoBox" style="display: none; border: 1px solid gray; padding: 10px; margin-bottom: 10px;">
-        <h4>Members</h4>
-        <ul id="groupMembersList"></ul>
-
-        <div id="adminControls" style="margin-top: 10px;">
-          <input type="text" id="newMemberEmail" placeholder="Enter user email to add" />
-          <button onclick="addMember()">Add Member</button>
-        </div>
-      </div>
-
-      <!-- Messages Box -->
-      <div id="messages" style="flex: 1; overflow-y: scroll; border: 1px solid gray; padding: 10px; margin-bottom: 10px;"></div>
-
-      <!-- Message Input -->
-      <div>
-        <input type="text" id="messageInput" placeholder="Type a message..." style="width: 80%;" />
-        <button onclick="sendMessage()">Send</button>
-      </div>
-
+    <div id="messages" class="messages-box"></div>
+    <div class="message-input">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
     </div>
   </div>
 
+  <!-- Right Panel (Group Info) -->
+  <div class="right-panel">
+    <button onclick="leaveGroup(selectedGroupId)">Leave Group</button>
+    <div id="adminControls">
+      <input type="text" id="newMemberEmail" placeholder="Enter user email to add" />
+      <button onclick="addMember()">Add Member</button>
+    </div>
+    <h4>Members</h4>
+    <ul id="groupMembersList"></ul>
+  </div>
+</div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="chat.js"></script>
+  <script src="../js/chat.js"></script>
 </body>
 </html>

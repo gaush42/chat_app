@@ -12,5 +12,6 @@ router.get('/:groupId/info', auth.authenticate, groupController.getGroupInfo);
 router.get('/my-groups', auth.authenticate, groupController.getUserGroups);
 router.get('/:groupId/messages', auth.authenticate, groupController.getGroupMessages);
 router.post('/:groupId/send', auth.authenticate, groupController.sendMessage);
+router.post('/leave-group', auth.authenticate, groupController.leaveGroup);
 
 module.exports = router;
