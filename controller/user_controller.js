@@ -8,7 +8,7 @@ exports.RegisterUser = async (req, res) => {
     const t = await sequelize.transaction()
     try {
         const { fullname, email, password } = req.body
-        if(!fullname, !email, !password){
+        if(!fullname || !email || !password){
             return res.status(400).json({
                 message: 'All fields are required.'
             })
